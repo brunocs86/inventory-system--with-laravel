@@ -7,6 +7,11 @@ use Request;
 
 class ProdutoController extends Controller {
 
+    public function listaJson(){
+        $produtos = DB::select('select * from produtos');
+        return $produtos;
+    }
+
     public function adiciona(){
 
         $nome = Request::input('nome');
@@ -22,7 +27,7 @@ class ProdutoController extends Controller {
           ]
         );
 
-        return view('produto.adicionado')->with('nome', $nome);
+        return redirect()->action('ProdutoController@lista')->withInput(Request::only('nome'));
     }
 
     public function novo(){
@@ -47,8 +52,9 @@ class ProdutoController extends Controller {
 
     $produtos = DB::select('select * from produtos');
 
-    //return view('listagem')->with( 'produtos', $produtos );
     return view('produto/listagem')->withProdutos( $produtos );
+
+    //return view('listagem')->with( 'produtos', $produtos );
     //return view('listagem', ['produtos' => $produtos]);
 
     //return view('listagem')->with('produtos', array());
@@ -59,8 +65,6 @@ class ProdutoController extends Controller {
     /*$data = [];
     $data['produtos'] = $produtos;
     return view('listagem', $data);*/
-
-
 
     /*$html = '<h1>Listagem de produtos com Laravel</h1>';
 
@@ -75,5 +79,6 @@ class ProdutoController extends Controller {
     $html .= '</ul>';
 
     return $html;*/
+
     }
 }
