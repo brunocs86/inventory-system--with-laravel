@@ -14,7 +14,15 @@ class ProdutoController extends Controller {
         $valor = Request::input('valor');
         $quantidade = Request::input('quantidade');
 
-        return var_dump(implode(', ', array($nome, $descricao, $valor, $quantidade)));
+        DB::table('produtos')->insert(
+          ['nome' => $nome,
+           'quantidade' => $quantidade,
+           'valor' => $valor,
+           'descricao' => $descricao
+          ]
+        );
+
+        return view('produto.adicionado')->with('nome', $nome);
     }
 
     public function novo(){
@@ -31,7 +39,7 @@ class ProdutoController extends Controller {
       return "Esse produto não existe";
     }
 
-    return view('produto/detalhes')->with( 'p', $resposta[0] );
+    return view('produto.detalhes')->with( 'p', $resposta[0] );
 
     }
 
