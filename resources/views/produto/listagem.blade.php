@@ -20,6 +20,11 @@
                         </a>
                     </td>
                     <td>
+                        <a href="{{ action('ProdutoController@formalt', $p->id) }}">
+                            <span class="fas fa-pencil-alt"></span>
+                        </a>
+                    </td>
+                    <td>
                         <a href="{{ action('ProdutoController@remove', $p->id) }}">
                             <span class="fas fa-trash-alt"></span>
                         </a>
@@ -29,17 +34,25 @@
         </table>
     @endif
 
-    <h4>
-        <span class="badge badge-danger pull-right">
-          Dois ou menos itens no estoque
-        </span>
-    </h4>
+        <h4>
+            <span class="badge badge-danger pull-right">
+              Dois ou menos itens no estoque
+            </span>
+        </h4>
 
-    @if(old('nome'))
+    @if(old('quantidade'))
         <br/>
         <br/>
         <div class="alert alert-success">
             <strong>Sucesso!</strong> O produto {{ old('nome') }} foi adicionado.
+        </div>
+    @endif
+
+    @if(old('valor'))
+        <br/>
+        <br/>
+        <div class="alert alert-success">
+            <strong>Sucesso!</strong> O produto {{ old('nome') }} foi alterado.
         </div>
     @endif
 

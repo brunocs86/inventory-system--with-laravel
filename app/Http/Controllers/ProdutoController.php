@@ -65,7 +65,7 @@ class ProdutoController extends Controller {
 
         return redirect()
             ->action('ProdutoController@lista')
-            ->withInput(Request::only('nome'));
+            ->withInput(Request::only('quantidade', 'nome'));
     }
 
     public function listaJson(){
@@ -80,15 +80,35 @@ class ProdutoController extends Controller {
         return redirect()->action('ProdutoController@lista');
     }
 
-   /* public function altera($id){
-
+    public function formalt($id){
         $produto = Produto::find($id);
 
         if(empty($produto)){
             return "Esse produto não existe";
         }
 
-        return view('produto.altera')->withP( $produto );
+        return view('produto.formalt')->withP( $produto );
 
-    }*/
+    }
+
+    public function altera($id){
+
+        $nome = Request::input('nome');
+        $descricao = Request::input('descricao');
+        $valor = Request::input('valor');
+        $quantidade = Request::input('quantidade');
+
+        DB::table('produtos')
+            ->where('id', $id )
+            ->update(
+                ['nome' => $nome,
+                 'descricao' => $descricao,
+                 'valor' => $valor,
+                 'quantidade' => $quantidade
+                ]);
+
+        return redirect()
+            ->action('ProdutoController@lista')
+            ->withInput(Request::only('valor', 'nome'));
+    }
 }

@@ -16,10 +16,7 @@ Route::get('/', function () {
     //return '<h1>Primeira Lógica com Laravel</h1>';
 });
 
-Route::get('/outra', function()
-{
-  phpinfo();
-});
+Route::get('/outra', function(){  phpinfo(); });
 
 Route::get('/produtos', 'ProdutoController@lista');
 
@@ -33,4 +30,6 @@ Route::get('/produtos/json', 'ProdutoController@listaJson');
 
 Route::get('/produtos/remove/{id}', 'ProdutoController@remove');
 
-//Route::post('/produtos/altera/{id}', 'ProdutoController@altera');
+Route::get('/produtos/formalt/{id}', 'ProdutoController@formalt')->where('id', '[0-9]+');
+
+Route::post('/produtos/altera/{id}', 'ProdutoController@altera');

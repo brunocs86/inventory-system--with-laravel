@@ -1,42 +1,43 @@
 <html>
 <head>
-  <link href="/css/app.css" rel="stylesheet">
-  <!--<link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">-->
-  <link href="/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width">
+    <link href="/css/app.css" rel="stylesheet">
+<!--<link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">-->
+    <link href="/css/fontawesome-all.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="container">
+<div class="container">
 
-      <nav class="navbar navbar-default">
-           <div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
 
-           <div class="navbar-header">
+            <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                   Estoque Laravel
+                    Estoque Laravel
                 </a>
 
-           </div>
+            </div>
 
-               <ul class="nav navbar-nav navbar-right">
-                   <li>
-                       <a href="{{ action( 'ProdutoController@lista' ) }}">Listagem</a>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{{ action( 'ProdutoController@lista' ) }}">Listagem</a>
 
-                        <font color="#f8f8ff">|</font>
+                    <font color="#f8f8ff">|</font>
 
-                        <a href="{{ action( 'ProdutoController@novo' ) }}">Novo</a>
-                   </li>
-               </ul>
+                    <a href="{{ action( 'ProdutoController@novo' ) }}">Novo</a>
+                </li>
+            </ul>
 
-           </div>
-      </nav>
-      <br/>
+        </div>
+    </nav>
+    <br/>
 
         @yield('conteudo')
 
-      <footer class="footer">
-          <p>© Livro de Laravel da Casa do Código.</p>
-      </footer>
+    <footer class="footer">
+        <p>Copyright © 2018 Bruno Silva.</p>
+    </footer>
 
-  </div>
+</div>
 </body>
 </html>
