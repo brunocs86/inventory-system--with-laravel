@@ -2,83 +2,93 @@
 
 namespace estoque\Http\Controllers;
 
+use estoque\Produto;
 use Illuminate\Support\Facades\DB;
 use Request;
+//use estoque\Http\Requests\ProdutosRequest;
 
 class ProdutoController extends Controller {
 
-    public function listaJson(){
+    public function lista(){
+
+        $produtos = Produto::all();
+
+        return view('produto.listagem')->withProdutos( $produtos );
+
+        //return view('listagem')->with( 'produtos', $produtos );
+        //return view('listagem', ['produtos' => $produtos]);
+
+        //return view('listagem')->with('produtos', array());
+
+        /*$data = ['produtos' => $produtos];
+        return view('listagem', $data);*/
+
+        /*$data = [];
+        $data['produtos'] = $produtos;
+        return view('listagem', $data);*/
+
+        /*$html = '<h1>Listagem de produtos com Laravel</h1>';
+
+        $html .= '<ul>';
+
         $produtos = DB::select('select * from produtos');
-        return $produtos;
+
+        foreach ($produtos as $p) {
+          $html .= '<li> Nome: '. $p->nome .', Descrição: '. $p->descricao.'</li>';
+        }
+
+        $html .= '</ul>';
+
+        return $html;*/
+
     }
 
-    public function adiciona(){
+    public function mostra($id){
 
-        $nome = Request::input('nome');
-        $descricao = Request::input('descricao');
-        $valor = Request::input('valor');
-        $quantidade = Request::input('quantidade');
+        $produto = Produto::find($id);
 
-        DB::table('produtos')->insert(
-          ['nome' => $nome,
-           'quantidade' => $quantidade,
-           'valor' => $valor,
-           'descricao' => $descricao
-          ]
-        );
+        if(empty($produto)){
+          return "Esse produto não existe";
+        }
 
-        return redirect()->action('ProdutoController@lista')->withInput(Request::only('nome'));
+        return view('produto.detalhes')->withP( $produto );
+
     }
 
     public function novo(){
         return view('produto.formulario');
     }
 
-    public function mostra($id){
+    public function adiciona(){
 
-    $id = Request::route('id');
+        Produto::create(Request::all());
 
-    $resposta = DB::select('select * from produtos where id = ?', [$id]);
-
-    if(empty($resposta)){
-      return "Esse produto não existe";
+        return redirect()
+            ->action('ProdutoController@lista')
+            ->withInput(Request::only('nome'));
     }
 
-    return view('produto.detalhes')->with( 'p', $resposta[0] );
-
+    public function listaJson(){
+        $produtos = Produto::all();
+        return respose()->json($produtos);
     }
 
-    public function lista(){
+    public function remove($id){
+        $produto = Produto::find($id);
+        $produto->delete();
 
-    $produtos = DB::select('select * from produtos');
-
-    return view('produto/listagem')->withProdutos( $produtos );
-
-    //return view('listagem')->with( 'produtos', $produtos );
-    //return view('listagem', ['produtos' => $produtos]);
-
-    //return view('listagem')->with('produtos', array());
-
-    /*$data = ['produtos' => $produtos];
-    return view('listagem', $data);*/
-
-    /*$data = [];
-    $data['produtos'] = $produtos;
-    return view('listagem', $data);*/
-
-    /*$html = '<h1>Listagem de produtos com Laravel</h1>';
-
-    $html .= '<ul>';
-
-    $produtos = DB::select('select * from produtos');
-
-    foreach ($produtos as $p) {
-      $html .= '<li> Nome: '. $p->nome .', Descrição: '. $p->descricao.'</li>';
+        return redirect()->action('ProdutoController@lista');
     }
 
-    $html .= '</ul>';
+   /* public function altera($id){
 
-    return $html;*/
+        $produto = Produto::find($id);
 
-    }
+        if(empty($produto)){
+            return "Esse produto não existe";
+        }
+
+        return view('produto.altera')->withP( $produto );
+
+    }*/
 }
