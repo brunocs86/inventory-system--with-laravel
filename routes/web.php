@@ -33,3 +33,14 @@ Route::get('/produtos/remove/{id}', 'ProdutoController@remove');
 Route::get('/produtos/formalt/{id}', 'ProdutoController@formalt')->where('id', '[0-9]+');
 
 Route::post('/produtos/altera/{id}', 'ProdutoController@altera');
+
+/*Route::get('/home', 'HomeController@index');
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
