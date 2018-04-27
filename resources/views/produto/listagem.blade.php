@@ -9,22 +9,22 @@
         <h1 align="center">Listagem de produtos</h1>
         <table class="table table-bordered table-hover">
             @foreach ($produtos as $p)
-                <tr class="{{$p->quantidade <= 2 ? 'bg-danger' : ''}}">
+                <tr class="{{ $p->quantidade <= 2 ? 'bg-danger' : ''}}">
                     <td> {{ $p->nome }} </td>
-                    <td> {{ $p->valor }}  </td>
+                    <td align="center" width="center"> {{ $p->valor }}  </td>
                     <td> {{ $p->descricao }} </td>
-                    <td> {{ $p->quantidade }} </td>
-                    <td>
+                    <td align="center" width="center"> {{ $p->quantidade }} </td>
+                    <td align="center" width="center">
                         <a href="/produtos/mostra/{{ $p->id }}">
                             <span class="fas fa-search-plus"></span>
                         </a>
                     </td>
-                    <td>
+                    <td align="center" width="center">
                         <a href="{{ action('ProdutoController@formalt', $p->id) }}">
                             <span class="fas fa-pencil-alt"></span>
                         </a>
                     </td>
-                    <td>
+                    <td align="center" width="center">
                         <a href="{{ action('ProdutoController@remove', $p->id) }}">
                             <span class="fas fa-trash-alt"></span>
                         </a>
@@ -33,6 +33,7 @@
             @endforeach
         </table>
     @endif
+
 
         <h4>
             <span class="badge badge-danger pull-right">
