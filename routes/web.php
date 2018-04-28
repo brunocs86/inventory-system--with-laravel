@@ -34,13 +34,8 @@ Route::get('/produtos/formalt/{id}', 'ProdutoController@formalt')->where('id', '
 
 Route::post('/produtos/altera/{id}', 'ProdutoController@altera');
 
-/*Route::get('/home', 'HomeController@index');
-
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);*/
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/logan', 'LoginController@logan');

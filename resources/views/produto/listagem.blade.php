@@ -34,12 +34,17 @@
         </table>
     @endif
 
-
-        <h4>
-            <span class="badge badge-danger pull-right">
-              Dois ou menos itens no estoque
-            </span>
-        </h4>
+    @foreach($produtos as $p)
+        @if($p->quantidade < 3)
+            <h4>
+                <span class="badge badge-danger pull-right">
+                  Dois ou menos itens no estoque
+                </span>
+                <br/>
+            </h4>
+            @break
+        @endif
+    @endforeach
 
     @if(old('quantidade'))
         <br/>
