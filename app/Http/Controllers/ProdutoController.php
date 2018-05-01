@@ -6,10 +6,16 @@ use estoque\Http\Requests\ProdutosRequest;
 use estoque\Produto;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Request;
 
 
 class ProdutoController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function lista(){
 
@@ -94,11 +100,19 @@ class ProdutoController extends Controller {
         return respose()->json($produtos);
     }
 
-    public function remove($id){
+    public function remove($id)
+    {
+        if(Auth::guest())
+        {
+            return('/login');
+        }
+
         $produto = Produto::find($id);
         $produto->delete();
 
-        return redirect()->action('ProdutoController@lista');
+        return redirect()
+            ->action('ProdutoController@lista')
+            ->withInput(Request::only('excluido'));
     }
 
     public function formalt($id){

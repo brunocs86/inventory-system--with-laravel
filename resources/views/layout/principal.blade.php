@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-expand-md navbar-laravel">
         <div class="container-fluid">
 
             <div class="navbar-header">
@@ -22,8 +22,11 @@
                 <li>
                     <a href="{{ action( 'ProdutoController@lista' ) }}">Listagem</a>
 
-                    <font color="#f8f8ff">|</font>
-
+                </li>
+                <li>
+                    <font color="#000"> | </font>
+                </li>
+                <li>
                     <a href="{{ action( 'ProdutoController@novo' ) }}">Novo</a>
                 </li>
             </ul>

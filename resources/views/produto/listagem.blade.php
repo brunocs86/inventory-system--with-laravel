@@ -1,37 +1,58 @@
-@extends('layout.principal')
+@extends('layouts.app')
 
 @section('conteudo')
 
     @if(empty($produtos))
-        <div><h1 align="center">Você não tem nenhum produto cadastrado. </h1></div>
+        <div><h2 align="center">Você não tem nenhum produto cadastrado. </h2></div>
 
     @else
-        <h1 align="center">Listagem de produtos</h1>
-        <table class="table table-bordered table-hover">
-            @foreach ($produtos as $p)
-                <tr class="{{ $p->quantidade <= 2 ? 'bg-danger' : ''}}">
-                    <td> {{ $p->nome }} </td>
-                    <td align="center" width="center"> {{ $p->valor }}  </td>
-                    <td> {{ $p->descricao }} </td>
-                    <td align="center" width="center"> {{ $p->quantidade }} </td>
-                    <td align="center" width="center">
-                        <a href="/produtos/mostra/{{ $p->id }}">
-                            <span class="fas fa-search-plus"></span>
-                        </a>
-                    </td>
-                    <td align="center" width="center">
-                        <a href="{{ action('ProdutoController@formalt', $p->id) }}">
-                            <span class="fas fa-pencil-alt"></span>
-                        </a>
-                    </td>
-                    <td align="center" width="center">
-                        <a href="{{ action('ProdutoController@remove', $p->id) }}">
-                            <span class="fas fa-trash-alt"></span>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
+        <h2 align="center">Listagem de produtos</h2>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-light" align="center">
+                        <th>Nome</th>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Detalhes</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($produtos as $p)
+                                <tr class="{{ $p->quantidade <= 2 ? 'bg-danger' : ''}}">
+                                    <td> {{ $p->nome }} </td>
+                                    <td align="center" width="center"> {{ $p->valor }}  </td>
+                                    <td> {{ $p->descricao }} </td>
+                                    <td align="center" width="center"> {{ $p->quantidade }} </td>
+                                    <td align="center" width="center">
+                                        <a href="/produtos/mostra/{{ $p->id }}">
+                                            <span class="fas fa-search-plus"></span>
+                                        </a>
+                                    </td>
+                                    <td align="center" width="center">
+                                        <a href="{{ action('ProdutoController@formalt', $p->id) }}">
+                                            <span class="fas fa-pencil-alt"></span>
+                                        </a>
+                                    </td>
+                                    <td align="center" width="center">
+                                        <a href="{{ action('ProdutoController@remove', $p->id) }}">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
     @endif
 
     @foreach($produtos as $p)

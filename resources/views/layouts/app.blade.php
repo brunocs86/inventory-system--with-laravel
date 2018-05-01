@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/fontawesome-all.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="app">
@@ -50,6 +51,9 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/home') }}">DashBoard</a>
+                                    <a class="dropdown-item" href="{{ action( 'ProdutoController@lista' ) }}">Listagem</a>
+                                    <a class="dropdown-item" href="{{ action( 'ProdutoController@novo' ) }}">Novo</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -69,7 +73,12 @@
 
         <main class="py-4">
             @yield('content')
+            @yield('conteudo')
         </main>
+
+        <footer class="footer">
+            <p>Copyright © 2018 Bruno Silva.</p>
+        </footer>
     </div>
 </body>
 </html>
